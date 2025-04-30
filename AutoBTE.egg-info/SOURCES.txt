@@ -1,0 +1,12 @@
+pyproject.toml
+setup.py
+AutoBTE.egg-info/PKG-INFO
+AutoBTE.egg-info/SOURCES.txt
+AutoBTE.egg-info/dependency_links.txt
+AutoBTE.egg-info/requires.txt
+AutoBTE.egg-info/top_level.txt
+params/Encut.py
+params/__init__.py
+params/kpts.py
+params/lattice.py
+params/slabs.py

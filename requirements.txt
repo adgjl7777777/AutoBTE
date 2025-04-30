@@ -1,0 +1,5 @@
+BoltzTraP2>=24.9.0
+chgnet>=0.4.0
+matplotlib>=3.9.0
+MDAnalysis>=2.8.0
+pyFFTW>=0.15.0
