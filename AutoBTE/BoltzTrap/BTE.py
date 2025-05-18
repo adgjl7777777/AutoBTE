@@ -62,6 +62,7 @@ class btp2:
         Args:
             n (int): Sets up a k-point grid with roughly `n` times the density of the input k-points.
                      Default value is 5.
+            eq (int): Number of equivalent k points to consider.
             emin (float): Minimum energy (in eV) to consider for interpolation.
             emax (float): Maximum energy (in eV) to consider for interpolation.
             rmin (float): Relative minimum energy (in eV) relative to the Fermi level. 
@@ -75,7 +76,20 @@ class btp2:
             raise ValueError("Both 'rmin' and 'emin' cannot be provided at the same time.")
         if 'rmax' in kwargs and 'emax' in kwargs:
             raise ValueError("Both 'rmax' and 'emax' cannot be provided at the same time.")
+        
+        if 'eq' in kwargs:
+            eq = kwargs['eq']
+            # build a new kwargs that no longer contains 'eq'
+            reduced_kwargs = {k: v for k, v in kwargs.items() if k != 'eq'}
 
+            # first recursion with fixed n=10
+            self.interpolate(n=10, **reduced_kwargs)
+
+            # compute a second n from eq and equivalences
+            newn = int(eq / len(self.equivalences) * 10)
+            self.interpolate(n=newn, **reduced_kwargs)
+
+            return
         restart = kwargs.get('restart', False)
         interpolate_needed = False
 
