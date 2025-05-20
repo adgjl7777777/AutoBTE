@@ -11,37 +11,38 @@ opt = Optimizer(atoms)
 # Set optimizer sequence using dictionaries
 opt.set_optimizer(
     {
-        "run_function": emt_run,
-        "run_type": "single",
-        "directory": "./test/emt_1/"
-    },
-    {
-        "run_function": vasp_run,
-        "run_type": "geo_opt",
-        "system_name": "Cu_Opt",
-        "k_point": (6, 6, 6),
-        "E_cut": 500,
-        "cores": 4,
-        "lreal": "Auto",
-        "directory": "./test/vasp_1/"
-    },
-    {
         "run_function": chgnet_run,
-        "run_type": "geo_opt",
-        "directory": "./test/chgnet_1/"
+        "run_type": "NPT",
+        "cell_opt": True,
+        "directory": f"./chgnet/",
+        "Ti":1500,
+        "Tf":300,
+        "dt":1,
+        "steps":750000,
+        "ramp_type":"short"
     },
     {
         "run_function": vasp_run,
-        "run_type": "NPT",
-        "system_name": "Cu_MD",
-        "k_point": (6, 6, 6),
-        "E_cut": 500,
-        "cores": 4,
-        "Ti": 1500,
-        "Tf": 298,
-        "steps": 10000,
-        "lreal": "Auto",
-        "directory": "./test/vasp_2/"
+        "run_type": "geo_opt",
+        "cell_opt": True,
+        "directory": f"./vasp_opt1/",
+        "system_name": "OPT_1",
+        "k_point":(1,1,4),
+        "E_cut":450,
+        "cores":1,
+        "vasp_kwargs": {
+            "nsw": 100,
+        }
+    },
+    {
+        "run_function": vasp_run,
+        "run_type": "geo_opt",
+        "cell_opt": True,
+        "directory": f"./vasp_opt2/",
+        "system_name": "OPT_2",
+        "k_point":(2,2,8),
+        "E_cut":450,
+        "cores":1
     }
 )
 

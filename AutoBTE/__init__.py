@@ -9,7 +9,7 @@ and DFT-based workflows.
 __version__ = "0.2.0"
 # BoltzTrap 하위모듈에서 BTE 관련 클래스나 함수 가져오기
 from .BoltzTrap.BTE import btp2   # 예시 이름. 실제 모듈명에 맞게 수정
-
+from .BoltzTrap.data_plot import bte_run
 # optimizer 서브패키지 노출
 from .optimizer.base import Optimizer
 from .optimizer.base import emt_run, vasp_run, chgnet_run
@@ -21,7 +21,7 @@ from .params.lattice import find_lattice
 
 # __all__ 은 `from AutoBTE import *` 할 때 노출될 이름들
 __all__ = [
-    "btp2",
+    "btp2","bte_run",
     "Optimizer", "emt_run", "vasp_run", "chgnet_run",
     "find_e", "find_k", "find_lattice",
     "__version__",
