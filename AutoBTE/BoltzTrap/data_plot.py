@@ -15,19 +15,19 @@ def bte_run(output_dir,vasp_dir,fixed_temp=300,fixed_mu=0.0,plot_type=['dos','ba
     os.makedirs(output_dir, exist_ok=True)
     log_file = f"{output_dir}/boltztrap.log"
 
+    #calculate
+    calc = btp2(vasp_dir)
+    calc.interpolate(eq=20000)
+    tmin, tmax, tsteps = 300, 1000, 20
+    mu_range = [-5, 5]
+    fermi_e = calc.get_fermi_energy()
+    with open(log_file, 'a') as f:
+        f.write(f"계산 시작\n")
+        f.write(f"온도 범위: {tmin}K ~ {tmax}K, steps: {tsteps}\n")
+        f.write(f"화학퍼텐셜 범위: {mu_range[0]} ~ {mu_range[1]} eV\n")
+        f.write(f"총 포인트 수 : {len(calc.equivalences)}\n")
+        f.write(f"Fermi energy: {fermi_e:.4f} eV\n\n")
     for eachplot in plot_type:
-        #calculate
-        calc = btp2(vasp_dir)
-        calc.interpolate(eq=20000)
-        tmin, tmax, tsteps = 300, 1000, 20
-        mu_range = [-5, 5]
-        fermi_e = calc.get_fermi_energy()
-        with open(log_file, 'a') as f:
-            f.write(f"계산 시작\n")
-            f.write(f"온도 범위: {tmin}K ~ {tmax}K, steps: {tsteps}\n")
-            f.write(f"화학퍼텐셜 범위: {mu_range[0]} ~ {mu_range[1]} eV\n")
-            f.write(f"총 포인트 수 : {len(calc.equivalences)}\n")
-            f.write(f"Fermi energy: {fermi_e:.4f} eV\n\n")
         if eachplot not in ['dos','band_structure','electric_conductivity', 'seebeck', 'thermal_conductivity', 'powfactor', 'zT']:
             print(f"Invalid plot type: {eachplot}. Skipping this plot.")
             continue
