@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 graph_axis_dict= {'electric_conductivity':'sigma', 'seebeck':'seebeck', 'thermal_conductivity':'kappa', 'powfactor':'powfactor', 'zT':'zT'}
-def bte_run(output_dir,vasp_dir,fixed_temp=300,fixed_mu=0.0,plot_type=['dos','band_structure','electric_conductivity', 'seebeck', 'thermal_conductivity', 'powfactor', 'zT']):
+def bte_run(output_dir,vasp_dir,equivalence=20000,fixed_temp=300,fixed_mu=0.0,plot_type=['dos','band_structure','electric_conductivity', 'seebeck', 'thermal_conductivity', 'powfactor', 'zT']):
     if not os.path.exists(f"{vasp_dir}/OUTCAR"):
         print(f"OUTCAR file not found in {vasp_dir}. Skipping this directory.")
         return
@@ -17,7 +17,7 @@ def bte_run(output_dir,vasp_dir,fixed_temp=300,fixed_mu=0.0,plot_type=['dos','ba
 
     #calculate
     calc = btp2(vasp_dir)
-    calc.interpolate(eq=20000)
+    calc.interpolate(eq=equivalence)
     tmin, tmax, tsteps = 300, 1000, 20
     mu_range = [-5, 5]
     fermi_e = calc.get_fermi_energy()
