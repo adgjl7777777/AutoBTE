@@ -33,4 +33,4 @@ export ASE_VASP_COMMAND="mpirun -n 2 --bind-to socket /home/Software/vasp.6.2.0.
 export VASP_PP_PATH="/home/transcendence/ppot/"
 ############################################################
 
-python3 vasp.py
+srun python3 vasp.py

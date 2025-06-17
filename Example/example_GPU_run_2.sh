@@ -15,16 +15,16 @@ NVARCH=`uname -s`_`uname -m`; export NVARCH
 NVCOMPILERS=/opt/nvidia/hpc_sdk; export NVCOMPILERS
 ############################################################
 
-####################environments setting####################
+####################openmpi setting####################
 export PATH=/home/Software/openmpi-4.1.0-10G/bin/:$PATH
 export LD_LIBRARY_PATH=/home/Software/openmpi-4.1.0-10G/lib/:$LD_LIBRARY_PATH
 export PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/21.7/compilers/bin/:$PATH
 export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/21.7/compilers/lib/:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/21.7/compilers/extras/qd/lib/:$LD_LIBRARY_PATH
-export PATH=/home/Software/vasp.6.2.0.openacc/:$PATH
 ############################################################
 
 ###################DFT(Vasp) path setting###################
+export PATH=/home/Software/vasp.6.2.0.openacc/:$PATH
 export LD_LIBRARY_PATH="/home/Software/BLAS-3.10.0/:$LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH="/home/Software/lapack-3.10.0/:$LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH="/home/Software/scalapack-2.1.0/:$LD_LIBRARY_PATH"
@@ -33,4 +33,4 @@ export ASE_VASP_COMMAND="mpirun -n 2 --bind-to socket vasp_std"
 export VASP_PP_PATH="/home/transcendence/ppot/"
 ############################################################
 
-python3 vasp.py
+srun python3 vasp.py
